@@ -1,0 +1,108 @@
+class Box{
+    //field of the Box Class
+    field int x,y;
+
+    //constructor
+    constructor Box new(int loc_x,int loc_y){
+        //loc_x 0~31,loc_y 0~15
+        let x=loc_x;
+        let y=loc_y;
+        do draw();
+        return this;
+    }
+
+    //method
+    //dispose method
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+    //draw method
+    method void draw(){
+        var int memAddress; 
+        let memAddress = 16384+(y*32*16+x);
+        do Memory.poke(memAddress+0, 0);
+        do Memory.poke(memAddress+32, 32766);
+        do Memory.poke(memAddress+64, 16386);
+        do Memory.poke(memAddress+96, 20490);
+        do Memory.poke(memAddress+128, 18450);
+        do Memory.poke(memAddress+160, 18450);
+        do Memory.poke(memAddress+192, 18450);
+        do Memory.poke(memAddress+224, 17442);
+        do Memory.poke(memAddress+256, 17442);
+        do Memory.poke(memAddress+288, 16962);
+        do Memory.poke(memAddress+320, 16962);
+        do Memory.poke(memAddress+352, 16770);
+        do Memory.poke(memAddress+384, 16514);
+        do Memory.poke(memAddress+416, 16386);
+        do Memory.poke(memAddress+448, 32766);
+        do Memory.poke(memAddress+480, 0);
+        return;
+    }
+    //erase method
+    method void erase(){
+        var int memAddress; 
+        let memAddress = 16384+(y*32*16+x);
+        do Memory.poke(memAddress+0,0);
+        do Memory.poke(memAddress+32,0);
+        do Memory.poke(memAddress+64,0);
+        do Memory.poke(memAddress+96,0);
+        do Memory.poke(memAddress+128,0);
+        do Memory.poke(memAddress+160,0);
+        do Memory.poke(memAddress+192,0);
+        do Memory.poke(memAddress+224,0);
+        do Memory.poke(memAddress+256,0);
+        do Memory.poke(memAddress+288,0);
+        do Memory.poke(memAddress+320,0);
+        do Memory.poke(memAddress+352,0);
+        do Memory.poke(memAddress+384,0);
+        do Memory.poke(memAddress+416,0);
+        do Memory.poke(memAddress+448,0);
+        do Memory.poke(memAddress+480,0);
+        return;
+    }
+    //move method
+    method void moveUp() {
+      if (y>0) {
+        do erase();
+        let y=y-1;
+        do draw();
+      }
+      return;
+   }
+
+   method void moveDown() {
+      if (y<15) {
+        do erase();
+        let y=y+1;
+        do draw();
+      }
+      return;
+   }
+
+   method void moveLeft() {
+      if (x>0) {
+         do erase();
+         let x=x-1;
+         do draw();
+      }
+      return;
+   }
+
+   method void moveRight() {
+      if (x<31) {
+         do erase();
+         let x=x+1;
+         do draw();
+      }
+      return;
+   }
+
+   method int getY() {
+        return y;
+   }
+
+   method int getX() {
+        return x;
+   }
+}
